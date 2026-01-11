@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virat Kohli Score Analytics Dashboard (2008-2022)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="bg-primary text-white py-4">
+        <div class="container">
+            <h1 class="text-center mb-0"><i class="fas fa-cricket-ball"></i> Virat Kohli Score Analytics Dashboard</h1>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-nav mx-auto">
+                <button class="nav-link btn btn-link text-white mx-2" onclick="showPage('overview')">Overview</button>
+                <button class="nav-link btn btn-link text-white mx-2" onclick="showPage('visualizations')">Visualizations</button>
+                <button class="nav-link btn btn-link text-white mx-2" onclick="showPage('dataTable')">Data Table</button>
+                <button class="nav-link btn btn-link text-white mx-2" onclick="showPage('qa')">Q&A Assistant</button>
+            </div>
+            <button id="themeToggle" class="btn btn-outline-light ms-3" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+    
+    <main class="container my-5">
+        <div id="overview" class="page">
+            <h2 class="text-center mb-4">Overview</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-trophy fa-2x text-primary mb-3"></i>
+                            <h3 class="card-title" id="totalMatches">-</h3>
+                            <p class="card-text">Total Matches</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line fa-2x text-success mb-3"></i>
+                            <h3 class="card-title" id="totalRuns">-</h3>
+                            <p class="card-text">Total Runs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-calculator fa-2x text-info mb-3"></i>
+                            <h3 class="card-title" id="averageRuns">-</h3>
+                            <p class="card-text">Average Runs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-star fa-2x text-warning mb-3"></i>
+                            <h3 class="card-title" id="highestScore">-</h3>
+                            <p class="card-text">Highest Score</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-medal fa-2x text-danger mb-3"></i>
+                            <h3 class="card-title" id="centuries">-</h3>
+                            <p class="card-text">Centuries</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-award fa-2x text-secondary mb-3"></i>
+                            <h3 class="card-title" id="fifties">-</h3>
+                            <p class="card-text">Fifties</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="visualizations" class="page hidden">
+            <h2 class="text-center mb-4">Visualizations</h2>
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <canvas id="runsOverTimeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <canvas id="runsByOpponentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <canvas id="runsByMatchTypeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <canvas id="yearWiseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="qa" class="page hidden">
+            <h2 class="text-center mb-4">Q&A Assistant</h2>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <p class="text-center mb-4">Ask questions about Virat Kohli's performance data!</p>
+                    <div class="mb-3">
+                        <strong>Sample Questions:</strong>
+                        <ul class="list-unstyled">
+                            <li><small class="text-muted">• What is the total runs?</small></li>
+                            <li><small class="text-muted">• What is the average runs?</small></li>
+                            <li><small class="text-muted">• How many centuries?</small></li>
+                            <li><small class="text-muted">• Most runs against which opponent?</small></li>
+                        </ul>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="questionInput" placeholder="Enter your question...">
+                        <button class="btn btn-primary" onclick="askQuestion()"><i class="fas fa-search"></i> Ask</button>
+                    </div>
+                    <div id="answer" class="alert alert-info" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="dataTable" class="page hidden">
+            <h2 class="text-center mb-4">Data Table</h2>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="dataTableContent">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Match No</th>
+                                    <th>Runs</th>
+                                    <th>Opponent</th>
+                                    <th>Ground</th>
+                                    <th>Date</th>
+                                    <th>Match Type</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p class="mb-0">Dashboard created with HTML, CSS & JavaScript | Data source: Virat Kohli Score Analytics</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

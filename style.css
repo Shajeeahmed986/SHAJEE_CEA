@@ -1,0 +1,102 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --navbar-bg: #343a40;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+}
+
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    --card-bg: #2c3e50;
+    --text-color: #ecf0f1;
+    --navbar-bg: #1a1a1a;
+    --primary-color: #3498db;
+    --secondary-color: #95a5a6;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --info-color: #3498db;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), #0056b3);
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #0056b3, #004085);
+}
+
+.alert {
+    border-radius: 10px;
+    border: none;
+    background-color: var(--info-color);
+    color: white;
+}
+
+.table {
+    color: var(--text-color);
+}
+
+.table-dark th {
+    background-color: var(--navbar-bg);
+    border-color: var(--secondary-color);
+}
+
+.page {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.page.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#themeToggle {
+    transition: transform 0.3s ease;
+}
+
+#themeToggle:hover {
+    transform: scale(1.1);
+}
+
+footer {
+    margin-top: auto;
+}
